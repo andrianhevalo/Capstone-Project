@@ -8,6 +8,9 @@ The goal of this project is to create a simple Data Pipeline in Google Cloud Pla
 4. BigQuery is a cloud data warehouse. If you are familiar with other SQL style databases then BigQuery should be pretty straightforward.
 5. Apache Beam allows us to create a pipeline for streaming or batch processing that integrates with GCP. It is particularly useful for parallel processing and is suited to Extract, Transform, and Load (ETL) type tasks so if we need to move data from one place to another while performing transformations or calculations Beam is a good choice.
 
+## Diagram
+<img width="722" alt="image" src="https://user-images.githubusercontent.com/51317733/179075466-88f398d1-3933-4a30-9132-29085eb22b4f.png">
+
 ## Streaming Pipeline steps:
 1. Real-time log data is published to the Pub/Sub topic via Python script.
 2. Then we create a Data Flow job which reads data from the topic and applies some transformations on the data.
@@ -17,4 +20,3 @@ The goal of this project is to create a simple Data Pipeline in Google Cloud Pla
 ## Batch Pipeline steps:
 Batch pipeline is very similar to the streaming one but the difference is that the data is uploaded to the Cloud Storage and Data Flow transforms it.
 
-<img width="722" alt="image" src="https://user-images.githubusercontent.com/51317733/179075466-88f398d1-3933-4a30-9132-29085eb22b4f.png">
