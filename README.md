@@ -17,3 +17,4 @@ The goal of this project is to create a simple Data Pipeline in Google Cloud Pla
 ## Batch Pipeline steps:
 Batch pipeline is very similar to the streaming one but the difference is that the data is uploaded to the Cloud Storage and Data Flow transforms it.
 
+<img width="722" alt="image" src="https://user-images.githubusercontent.com/51317733/179075466-88f398d1-3933-4a30-9132-29085eb22b4f.png">
