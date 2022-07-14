@@ -7,3 +7,13 @@ The goal of this project is to create a simple Data Pipeline in Google Cloud Pla
 3. Cloud Storage is the object storage in GCP.
 4. BigQuery is a cloud data warehouse. If you are familiar with other SQL style databases then BigQuery should be pretty straightforward.
 5. Apache Beam allows us to create a pipeline for streaming or batch processing that integrates with GCP. It is particularly useful for parallel processing and is suited to Extract, Transform, and Load (ETL) type tasks so if we need to move data from one place to another while performing transformations or calculations Beam is a good choice.
+
+## Streaming Pipeline steps:
+1. Real-time log data is published to the Pub/Sub topic via Python script.
+2. Then we create a Data Flow job which reads data from the topic and applies some transformations on the data.
+3. After transforming the data, Beam will then connect to BigQuery and append the data to our table.
+4. To carry out analysis we can connect to BigQuery using a variety of tools such as Tableau and Python.
+
+## Batch Pipeline steps:
+Batch pipeline is very similar to the streaming one but the difference is that the data is uploaded to the Cloud Storage and Data Flow transforms it.
+
