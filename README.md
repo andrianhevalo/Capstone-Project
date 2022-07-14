@@ -20,3 +20,43 @@ The goal of this project is to create a simple Data Pipeline in Google Cloud Pla
 ## Batch Pipeline steps:
 Batch pipeline is very similar to the streaming one but the difference is that the data is uploaded to the Cloud Storage and Data Flow transforms it.
 
+## How to run the pipeline?
+
+- Upload the code base to the Cloud Storage and run the following commands in the Cloud console:
+- 
+```
+# Copy file from cloud storage
+gsutil cp gs://<YOUR-BUCKET>/ * .
+sudo pip install apache-beam[gcp] oauth2client==3.0.0 
+sudo pip install -U pip
+sudo pip install Faker==1.0.2
+# Environment variables
+BUCKET=<YOUR-BUCKET>
+PROJECT=<YOUR-PROJECT>
+```
+
+- Run the script which generates random log data and pushes data to the Cloud Pub/Sub topic (you should see logs messages in the terminal):
+```
+python publish_logs.py
+```
+<img width="1490" alt="image" src="https://user-images.githubusercontent.com/51317733/179076574-22694d54-8a29-45e1-bd78-8724d8843539.png">
+
+We can see topic metrics here:
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/51317733/179076811-6b6a44cf-2ca8-4f93-9034-9eed096a4877.png">
+
+- Run the Data Flow pipeline by the next command:
+```
+python main_pipeline_stream.py --runner DataFlow --project $PROJECT --temp_location $BUCKET/tmp --staging_location $BUCKET/staging --streaming
+```
+<img width="1500" alt="image" src="https://user-images.githubusercontent.com/51317733/179076744-45ad426a-b2c6-49a1-b68d-8739e0e3a4ce.png">
+
+Job graph:
+<img width="1510" alt="image" src="https://user-images.githubusercontent.com/51317733/179076865-dba532a6-ec90-4463-8a22-ec14b449888c.png">
+
+- Query the data in BigQuery
+```
+SELECT * FROM `capstone-project-355520.log_data_dataset.log_data` 
+```
+<img width="1151" alt="image" src="https://user-images.githubusercontent.com/51317733/179077005-6e6d846d-1a64-4328-963c-bfe43011549c.png">
+
+```
